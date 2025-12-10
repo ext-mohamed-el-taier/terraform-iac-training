@@ -1,0 +1,29 @@
+#  Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# .terraform.lock.hcl
+*.terraform.lock.hcl
+
+# .tfvars files
+**/*.tfvars
+*.notes.md
+notes.md
+301-workspaces/solution/payload.json
+301-workspaces/solution/run.sh
+
+# tfplan files
+*.tfplan
+
+examples/
+!*/solution*/terraform.tfvars
+
+**/.kube
+*.DS_Store
+
+# vim
+*.swp
+*.swo
