@@ -13,6 +13,7 @@
 *.notes.md
 notes.md
 **/InstructorNotes.md
+CLAUDE.md
 301-workspaces/solution/payload.json
 301-workspaces/solution/run.sh
 
