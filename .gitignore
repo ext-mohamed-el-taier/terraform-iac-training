@@ -12,6 +12,7 @@
 **/*.tfvars
 *.notes.md
 notes.md
+**/InstructorNotes.md
 301-workspaces/solution/payload.json
 301-workspaces/solution/run.sh
 
