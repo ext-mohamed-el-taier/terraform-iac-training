@@ -208,27 +208,49 @@ View all Resource Groups and you should see the recently created Resource Group.
 
 ### Scale Resources
 
-Now add a new Resource Group resource that scales with a `count` parameter.
+Now add a new Resource Group resource that scales using `for_each`. This is the preferred approach over `count` because resources are keyed by name rather than index, making additions and removals safer.
 
 > Note: This is ADDING another `resource` block in addition to the one you have already created.
 
-```hcl
-resource "azurerm_resource_group" "count" {
-  count    = 2
+First, define a variable to hold the list of environments:
 
-  name     = "tstraub-myfirstrg-${count.index}"
+```hcl
+variable "environments" {
+  type        = list(string)
+  default     = ["dev", "prod"]
+  description = "List of environments to create resource groups for"
+}
+```
+
+Then create the resource group using `for_each` with `toset()`:
+
+```hcl
+resource "azurerm_resource_group" "foreach" {
+  for_each = toset(var.environments)
+
+  name     = "{PREFIX}-myfirstrg-${each.key}"
   location = "centralus"
+
+  tags = {
+    terraform   = "true"
+    environment = each.key
+  }
 }
 ```
 
 Run another `terraform plan` then `terraform apply` and validate the resource groups have been created.
 
+> **Why `for_each` over `count`?**
+> - With `count`, resources are identified by index (0, 1, 2...). If you remove an item from the middle, all subsequent resources shift and get recreated.
+> - With `for_each`, resources are identified by their key (e.g., "dev", "prod"). Removing one doesn't affect the others.
+
 ---
 ## Advanced areas to explore
 
-1. Play around with adjusting the `count` and `name` parameters, then running `plan` and `apply`.
+1. Play around with adjusting the `environments` variable, then running `plan` and `apply`. Notice how adding or removing an environment only affects that specific resource.
 2. Run the `plan` command with the `-out` option and apply that output.
-3. Add tags to each resource.
+3. Add additional tags to each resource.
+
 
 ---
 ### Cleanup
@@ -240,8 +262,8 @@ The output will look ***similar*** to this:
 ```sh
 $ terraform destroy
 azurerm_resource_group.main: Refreshing state... (ID: /subscriptions/.../resourceGroups/challenge01-rg)
-azurerm_resource_group.count[0]: Refreshing state... (ID: /subscriptions/.../resourceGroups/challenge01-rg-0)
-azurerm_resource_group.count[1]: Refreshing state... (ID: /subscriptions/.../resourceGroups/challenge01-rg-1)
+azurerm_resource_group.foreach["dev"]: Refreshing state... (ID: /subscriptions/.../resourceGroups/challenge01-rg-dev)
+azurerm_resource_group.foreach["prod"]: Refreshing state... (ID: /subscriptions/.../resourceGroups/challenge01-rg-prod)
 
 An execution plan has been generated and is shown below.
 Resource actions are indicated with the following symbols:
@@ -249,9 +271,9 @@ Resource actions are indicated with the following symbols:
 
 Terraform will perform the following actions:
 
-  - azurerm_resource_group.count[0]
+  - azurerm_resource_group.foreach["dev"]
 
-  - azurerm_resource_group.count[1]
+  - azurerm_resource_group.foreach["prod"]
 
   - azurerm_resource_group.main
 
@@ -259,14 +281,14 @@ Plan: 0 to add, 0 to change, 3 to destroy.
 
 Do you really want to destroy all resources?
   Terraform will destroy all your managed infrastructure, as shown above.
-  There is no undo. Only 'yes' will be accepted to confirm.clear
+  There is no undo. Only 'yes' will be accepted to confirm.
 
   Enter a value: yes
 
 ...
 
-azurerm_resource_group.count[0]: Destruction complete after 45s
-azurerm_resource_group.count[1]: Destruction complete after 45s
+azurerm_resource_group.foreach["dev"]: Destruction complete after 45s
+azurerm_resource_group.foreach["prod"]: Destruction complete after 45s
 azurerm_resource_group.main: Destruction complete after 45s
 
 Destroy complete! Resources: 3 destroyed.
@@ -278,4 +300,5 @@ Run a `terraform destroy` and follow the prompts to remove the infrastructure.
 
 ## Resources
 
-- [Terraform Count](https://www.terraform.io/docs/configuration/interpolation.html#count-information)
+- [Terraform for_each](https://developer.hashicorp.com/terraform/language/meta-arguments/for_each)
+- [Terraform count](https://developer.hashicorp.com/terraform/language/meta-arguments/count)

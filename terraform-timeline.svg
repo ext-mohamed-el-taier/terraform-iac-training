@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 600">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#16213e;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#7b4397;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#dc2430;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1400" height="600" fill="url(#bgGradient)"/>
+
+  <!-- Title -->
+  <text x="700" y="40" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#ffffff" text-anchor="middle">Terraform Evolution Timeline</text>
+  <text x="700" y="65" font-family="Arial, sans-serif" font-size="14" fill="#888888" text-anchor="middle">From HashiCorp Launch to Industry Standard (and the Fork)</text>
+
+  <!-- Main Timeline Line -->
+  <line x1="80" y1="280" x2="1320" y2="280" stroke="url(#lineGradient)" stroke-width="4" stroke-linecap="round" filter="url(#glow)"/>
+
+  <!-- 2014 - Initial Release -->
+  <circle cx="120" cy="280" r="12" fill="#7b4397" stroke="#ffffff" stroke-width="2" filter="url(#glow)"/>
+  <text x="120" y="320" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#7b4397" text-anchor="middle">2014</text>
+  <rect x="45" y="120" width="150" height="130" rx="8" fill="#2a2a4a" stroke="#7b4397" stroke-width="1"/>
+  <text x="120" y="142" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">v0.1.0 - Birth</text>
+  <text x="120" y="160" font-family="Arial, sans-serif" font-size="9" fill="#aaaaaa" text-anchor="middle">─────────────</text>
+  <text x="120" y="177" font-family="Arial, sans-serif" font-size="9" fill="#88ccff" text-anchor="middle">HCL Language</text>
+  <text x="120" y="191" font-family="Arial, sans-serif" font-size="8" fill="#888888" text-anchor="middle">Human-readable config</text>
+  <text x="120" y="208" font-family="Arial, sans-serif" font-size="9" fill="#88ccff" text-anchor="middle">State Management</text>
+  <text x="120" y="222" font-family="Arial, sans-serif" font-size="8" fill="#888888" text-anchor="middle">Tracks what exists</text>
+  <text x="120" y="239" font-family="Arial, sans-serif" font-size="9" fill="#88ff88" text-anchor="middle">MPL 2.0 License</text>
+  <line x1="120" y1="250" x2="120" y2="268" stroke="#7b4397" stroke-width="2"/>
+
+  <!-- 2017 - v0.10 -->
+  <circle cx="300" cy="280" r="12" fill="#8b5ca8" stroke="#ffffff" stroke-width="2" filter="url(#glow)"/>
+  <text x="300" y="320" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#8b5ca8" text-anchor="middle">2017</text>
+  <rect x="225" y="340" width="150" height="115" rx="8" fill="#2a2a4a" stroke="#8b5ca8" stroke-width="1"/>
+  <text x="300" y="362" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">v0.10 - Providers</text>
+  <text x="300" y="378" font-family="Arial, sans-serif" font-size="9" fill="#aaaaaa" text-anchor="middle">─────────────</text>
+  <text x="300" y="395" font-family="Arial, sans-serif" font-size="9" fill="#88ccff" text-anchor="middle">Provider Split</text>
+  <text x="300" y="409" font-family="Arial, sans-serif" font-size="8" fill="#888888" text-anchor="middle">Separate downloads</text>
+  <text x="300" y="423" font-family="Arial, sans-serif" font-size="8" fill="#888888" text-anchor="middle">faster updates</text>
+  <text x="300" y="440" font-family="Arial, sans-serif" font-size="9" fill="#88ccff" text-anchor="middle">Registry Launched</text>
+  <line x1="300" y1="292" x2="300" y2="338" stroke="#8b5ca8" stroke-width="2"/>
+
+  <!-- 2019 - v0.12 -->
+  <circle cx="480" cy="280" r="14" fill="#9b6cb9" stroke="#ffffff" stroke-width="2" filter="url(#glow)"/>
+  <text x="480" y="320" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#9b6cb9" text-anchor="middle">2019</text>
+  <rect x="395" y="105" width="170" height="150" rx="8" fill="#2a2a4a" stroke="#9b6cb9" stroke-width="2"/>
+  <text x="480" y="127" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">v0.12 - Game Changer</text>
+  <text x="480" y="143" font-family="Arial, sans-serif" font-size="9" fill="#aaaaaa" text-anchor="middle">─────────────────</text>
+  <text x="480" y="160" font-family="Arial, sans-serif" font-size="9" fill="#88ccff" text-anchor="middle">for_each loops</text>
+  <text x="480" y="174" font-family="Arial, sans-serif" font-size="8" fill="#888888" text-anchor="middle">Create multiple resources</text>
+  <text x="480" y="188" font-family="Arial, sans-serif" font-size="8" fill="#888888" text-anchor="middle">with stable keys</text>
+  <text x="480" y="205" font-family="Arial, sans-serif" font-size="9" fill="#88ccff" text-anchor="middle">Type System</text>
+  <text x="480" y="219" font-family="Arial, sans-serif" font-size="8" fill="#888888" text-anchor="middle">list, map, object types</text>
+  <text x="480" y="233" font-family="Arial, sans-serif" font-size="8" fill="#888888" text-anchor="middle">catch errors early</text>
+  <text x="480" y="248" font-family="Arial, sans-serif" font-size="9" fill="#ffcc88" text-anchor="middle">⚠ Breaking changes</text>
+  <line x1="480" y1="255" x2="480" y2="266" stroke="#9b6cb9" stroke-width="2"/>
+
+  <!-- 2021 - v1.0 -->
+  <circle cx="660" cy="280" r="16" fill="#ab7cca" stroke="#ffffff" stroke-width="3" filter="url(#glow)"/>
+  <text x="660" y="320" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#ab7cca" text-anchor="middle">2021</text>
+  <rect x="575" y="340" width="170" height="130" rx="8" fill="#2a2a4a" stroke="#ab7cca" stroke-width="2"/>
+  <text x="660" y="362" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle">v1.0 - Stable!</text>
+  <text x="660" y="378" font-family="Arial, sans-serif" font-size="9" fill="#aaaaaa" text-anchor="middle">─────────────────</text>
+  <text x="660" y="395" font-family="Arial, sans-serif" font-size="9" fill="#88ccff" text-anchor="middle">Stability Promise</text>
+  <text x="660" y="409" font-family="Arial, sans-serif" font-size="8" fill="#888888" text-anchor="middle">No more breaking</text>
+  <text x="660" y="423" font-family="Arial, sans-serif" font-size="8" fill="#888888" text-anchor="middle">changes in 1.x</text>
+  <text x="660" y="440" font-family="Arial, sans-serif" font-size="9" fill="#88ccff" text-anchor="middle">moved blocks</text>
+  <text x="660" y="454" font-family="Arial, sans-serif" font-size="8" fill="#888888" text-anchor="middle">Refactor without destroy</text>
+  <line x1="660" y1="292" x2="660" y2="338" stroke="#ab7cca" stroke-width="2"/>
+
+  <!-- Aug 2023 - BSL License Change -->
+  <circle cx="880" cy="280" r="14" fill="#ff4444" stroke="#ffff00" stroke-width="3" filter="url(#glow)"/>
+  <text x="880" y="320" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#ff4444" text-anchor="middle">Aug 2023</text>
+  <rect x="790" y="100" width="180" height="155" rx="8" fill="#3a2020" stroke="#ff4444" stroke-width="2"/>
+  <text x="880" y="122" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#ff6666" text-anchor="middle">⚠ LICENSE DRAMA</text>
+  <text x="880" y="138" font-family="Arial, sans-serif" font-size="9" fill="#aaaaaa" text-anchor="middle">─────────────────</text>
+  <text x="880" y="155" font-family="Arial, sans-serif" font-size="9" fill="#ffffff" text-anchor="middle">MPL 2.0 → BSL 1.1</text>
+  <text x="880" y="172" font-family="Arial, sans-serif" font-size="8" fill="#ffaaaa" text-anchor="middle">Competitors can't use</text>
+  <text x="880" y="186" font-family="Arial, sans-serif" font-size="8" fill="#ffaaaa" text-anchor="middle">No longer "open source"</text>
+  <text x="880" y="203" font-family="Arial, sans-serif" font-size="9" fill="#88ff88" text-anchor="middle">Community Response:</text>
+  <text x="880" y="217" font-family="Arial, sans-serif" font-size="9" fill="#88ff88" text-anchor="middle">OpenTofu Fork (Sep 2023)</text>
+  <text x="880" y="234" font-family="Arial, sans-serif" font-size="8" fill="#888888" text-anchor="middle">Linux Foundation backed</text>
+  <text x="880" y="248" font-family="Arial, sans-serif" font-size="8" fill="#888888" text-anchor="middle">Drop-in replacement</text>
+  <line x1="880" y1="255" x2="880" y2="266" stroke="#ff4444" stroke-width="2"/>
+
+  <!-- Fork indicator -->
+  <path d="M 880 295 Q 880 340 820 380" stroke="#88ff88" stroke-width="2" fill="none" stroke-dasharray="5,3"/>
+  <rect x="720" y="490" width="160" height="70" rx="8" fill="#1a3a1a" stroke="#88ff88" stroke-width="2"/>
+  <text x="800" y="515" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#88ff88" text-anchor="middle">OpenTofu</text>
+  <text x="800" y="533" font-family="Arial, sans-serif" font-size="9" fill="#cccccc" text-anchor="middle">MPL 2.0 (truly open)</text>
+  <text x="800" y="548" font-family="Arial, sans-serif" font-size="8" fill="#888888" text-anchor="middle">Same syntax, community-run</text>
+
+  <!-- 2024-2025 - Current -->
+  <circle cx="1100" cy="280" r="14" fill="#dc2430" stroke="#ffffff" stroke-width="2" filter="url(#glow)"/>
+  <text x="1100" y="320" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#dc2430" text-anchor="middle">2024-25</text>
+  <rect x="1000" y="340" width="200" height="130" rx="8" fill="#2a2a4a" stroke="#dc2430" stroke-width="2"/>
+  <text x="1100" y="362" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">v1.14+ Features</text>
+  <text x="1100" y="378" font-family="Arial, sans-serif" font-size="9" fill="#aaaaaa" text-anchor="middle">───────────────────</text>
+  <text x="1100" y="398" font-family="Arial, sans-serif" font-size="9" fill="#88ccff" text-anchor="middle">import blocks</text>
+  <text x="1100" y="412" font-family="Arial, sans-serif" font-size="8" fill="#888888" text-anchor="middle">Adopt existing resources</text>
+  <text x="1100" y="432" font-family="Arial, sans-serif" font-size="9" fill="#88ccff" text-anchor="middle">terraform test</text>
+  <text x="1100" y="446" font-family="Arial, sans-serif" font-size="8" fill="#888888" text-anchor="middle">Built-in testing framework</text>
+  <line x1="1100" y1="292" x2="1100" y2="338" stroke="#dc2430" stroke-width="2"/>
+
+  <!-- Impact Legend -->
+  <rect x="1020" y="105" width="280" height="145" rx="8" fill="#2a2a4a" stroke="#666666" stroke-width="1"/>
+  <text x="1160" y="127" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">What This Means For You</text>
+  <text x="1160" y="143" font-family="Arial, sans-serif" font-size="9" fill="#aaaaaa" text-anchor="middle">───────────────────</text>
+  <text x="1035" y="163" font-family="Arial, sans-serif" font-size="9" fill="#88ccff">for_each</text>
+  <text x="1095" y="163" font-family="Arial, sans-serif" font-size="8" fill="#888888">= create 10 VMs in 1 block</text>
+  <text x="1035" y="180" font-family="Arial, sans-serif" font-size="9" fill="#88ccff">Types</text>
+  <text x="1085" y="180" font-family="Arial, sans-serif" font-size="8" fill="#888888">= validate input before apply</text>
+  <text x="1035" y="197" font-family="Arial, sans-serif" font-size="9" fill="#88ccff">moved</text>
+  <text x="1090" y="197" font-family="Arial, sans-serif" font-size="8" fill="#888888">= rename without recreating</text>
+  <text x="1035" y="214" font-family="Arial, sans-serif" font-size="9" fill="#88ccff">import</text>
+  <text x="1090" y="214" font-family="Arial, sans-serif" font-size="8" fill="#888888">= adopt existing resources</text>
+  <text x="1035" y="231" font-family="Arial, sans-serif" font-size="9" fill="#88ccff">test</text>
+  <text x="1080" y="231" font-family="Arial, sans-serif" font-size="8" fill="#888888">= validate before deploy</text>
+
+  <!-- Footer -->
+  <text x="700" y="580" font-family="Arial, sans-serif" font-size="11" fill="#666666" text-anchor="middle">HashiCorp Terraform (BSL 1.1) vs OpenTofu (MPL 2.0) - Both use same HCL syntax, 3,000+ providers</text>
+</svg>

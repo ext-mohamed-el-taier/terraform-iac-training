@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 850">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#000000;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1A1A1A;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="850" fill="url(#bgGrad)"/>
+
+  <!-- Header Bar -->
+  <rect x="0" y="0" width="1200" height="100" fill="#000000"/>
+
+  <text x="50" y="60" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#ffffff">HashiCorp</text>
+  <text x="50" y="82" font-family="Arial, sans-serif" font-size="14" fill="#888888">Infrastructure Automation Software</text>
+
+  <!-- Title -->
+  <text x="700" y="55" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle">Product Portfolio</text>
+  <text x="700" y="80" font-family="Arial, sans-serif" font-size="13" fill="#666666" text-anchor="middle">Cloud Infrastructure Automation</text>
+
+  <!-- Divider line -->
+  <line x1="0" y1="100" x2="1200" y2="100" stroke="#333333" stroke-width="1"/>
+
+  <!-- Row 1 - Infrastructure -->
+  <text x="60" y="140" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#666666" letter-spacing="2">INFRASTRUCTURE</text>
+
+  <!-- Terraform -->
+  <rect x="50" y="160" width="270" height="200" rx="4" fill="#1D1D1D" stroke="#333333" stroke-width="1"/>
+  <rect x="50" y="160" width="270" height="4" rx="2" fill="#7B42BC"/>
+  <text x="185" y="200" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#ffffff" text-anchor="middle">Terraform</text>
+  <text x="185" y="220" font-family="Arial, sans-serif" font-size="10" fill="#7B42BC" text-anchor="middle">Infrastructure as Code</text>
+  <line x1="70" y1="232" x2="300" y2="232" stroke="#333333" stroke-width="1"/>
+  <text x="185" y="252" font-family="Arial, sans-serif" font-size="9" fill="#AAAAAA" text-anchor="middle">Provision and manage any cloud,</text>
+  <text x="185" y="266" font-family="Arial, sans-serif" font-size="9" fill="#AAAAAA" text-anchor="middle">infrastructure, or service</text>
+  <text x="70" y="293" font-family="Arial, sans-serif" font-size="9" fill="#666666">✓ Multi-cloud provisioning</text>
+  <text x="70" y="310" font-family="Arial, sans-serif" font-size="9" fill="#666666">✓ Declarative configuration</text>
+  <text x="70" y="327" font-family="Arial, sans-serif" font-size="9" fill="#666666">✓ 3,000+ providers</text>
+  <text x="70" y="344" font-family="Arial, sans-serif" font-size="9" fill="#666666">✓ State management</text>
+
+  <!-- Packer -->
+  <rect x="340" y="160" width="270" height="200" rx="4" fill="#1D1D1D" stroke="#333333" stroke-width="1"/>
+  <rect x="340" y="160" width="270" height="4" rx="2" fill="#02A8EF"/>
+  <text x="475" y="200" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#ffffff" text-anchor="middle">Packer</text>
+  <text x="475" y="220" font-family="Arial, sans-serif" font-size="10" fill="#02A8EF" text-anchor="middle">Image Builder</text>
+  <line x1="360" y1="232" x2="590" y2="232" stroke="#333333" stroke-width="1"/>
+  <text x="475" y="252" font-family="Arial, sans-serif" font-size="9" fill="#AAAAAA" text-anchor="middle">Build automated machine images</text>
+  <text x="475" y="266" font-family="Arial, sans-serif" font-size="9" fill="#AAAAAA" text-anchor="middle">for multiple platforms</text>
+  <text x="360" y="293" font-family="Arial, sans-serif" font-size="9" fill="#666666">✓ Immutable infrastructure</text>
+  <text x="360" y="310" font-family="Arial, sans-serif" font-size="9" fill="#666666">✓ AMI, Azure, Docker, VMware</text>
+  <text x="360" y="327" font-family="Arial, sans-serif" font-size="9" fill="#666666">✓ CI/CD integration</text>
+  <text x="360" y="344" font-family="Arial, sans-serif" font-size="9" fill="#666666">✓ HCL or JSON config</text>
+
+  <!-- Vagrant -->
+  <rect x="630" y="160" width="270" height="200" rx="4" fill="#1D1D1D" stroke="#333333" stroke-width="1"/>
+  <rect x="630" y="160" width="270" height="4" rx="2" fill="#1868F2"/>
+  <text x="765" y="200" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#ffffff" text-anchor="middle">Vagrant</text>
+  <text x="765" y="220" font-family="Arial, sans-serif" font-size="10" fill="#1868F2" text-anchor="middle">Development Environments</text>
+  <line x1="650" y1="232" x2="880" y2="232" stroke="#333333" stroke-width="1"/>
+  <text x="765" y="252" font-family="Arial, sans-serif" font-size="9" fill="#AAAAAA" text-anchor="middle">Create reproducible development</text>
+  <text x="765" y="266" font-family="Arial, sans-serif" font-size="9" fill="#AAAAAA" text-anchor="middle">environments</text>
+  <text x="650" y="293" font-family="Arial, sans-serif" font-size="9" fill="#666666">✓ Portable environments</text>
+  <text x="650" y="310" font-family="Arial, sans-serif" font-size="9" fill="#666666">✓ VirtualBox, VMware, Hyper-V</text>
+  <text x="650" y="327" font-family="Arial, sans-serif" font-size="9" fill="#666666">✓ Share via Vagrantfile</text>
+  <text x="650" y="344" font-family="Arial, sans-serif" font-size="9" fill="#666666">✓ Multi-machine support</text>
+
+  <!-- Nomad -->
+  <rect x="920" y="160" width="230" height="200" rx="4" fill="#1D1D1D" stroke="#333333" stroke-width="1"/>
+  <rect x="920" y="160" width="230" height="4" rx="2" fill="#00CA8E"/>
+  <text x="1035" y="200" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#ffffff" text-anchor="middle">Nomad</text>
+  <text x="1035" y="220" font-family="Arial, sans-serif" font-size="10" fill="#00CA8E" text-anchor="middle">Workload Orchestration</text>
+  <line x1="940" y1="232" x2="1130" y2="232" stroke="#333333" stroke-width="1"/>
+  <text x="1035" y="252" font-family="Arial, sans-serif" font-size="9" fill="#AAAAAA" text-anchor="middle">Deploy containers, VMs,</text>
+  <text x="1035" y="266" font-family="Arial, sans-serif" font-size="9" fill="#AAAAAA" text-anchor="middle">and applications</text>
+  <text x="940" y="293" font-family="Arial, sans-serif" font-size="9" fill="#666666">✓ Simpler than K8s</text>
+  <text x="940" y="310" font-family="Arial, sans-serif" font-size="9" fill="#666666">✓ Multi-region</text>
+  <text x="940" y="327" font-family="Arial, sans-serif" font-size="9" fill="#666666">✓ Batch and service</text>
+  <text x="940" y="344" font-family="Arial, sans-serif" font-size="9" fill="#666666">✓ GPU scheduling</text>
+
+  <!-- Row 2 - Security -->
+  <text x="60" y="400" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#666666" letter-spacing="2">SECURITY</text>
+
+  <!-- Vault -->
+  <rect x="50" y="420" width="360" height="200" rx="4" fill="#1D1D1D" stroke="#333333" stroke-width="1"/>
+  <rect x="50" y="420" width="360" height="4" rx="2" fill="#FFCF25"/>
+  <text x="230" y="462" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#ffffff" text-anchor="middle">Vault</text>
+  <text x="230" y="480" font-family="Arial, sans-serif" font-size="10" fill="#FFCF25" text-anchor="middle">Secrets Management</text>
+  <line x1="70" y1="492" x2="390" y2="492" stroke="#333333" stroke-width="1"/>
+  <text x="230" y="512" font-family="Arial, sans-serif" font-size="9" fill="#AAAAAA" text-anchor="middle">Securely store, access, and manage secrets,</text>
+  <text x="230" y="526" font-family="Arial, sans-serif" font-size="9" fill="#AAAAAA" text-anchor="middle">tokens, passwords, certificates, and encryption keys</text>
+  <text x="70" y="553" font-family="Arial, sans-serif" font-size="9" fill="#666666">✓ Dynamic secrets generation</text>
+  <text x="70" y="570" font-family="Arial, sans-serif" font-size="9" fill="#666666">✓ Encryption as a service</text>
+  <text x="70" y="587" font-family="Arial, sans-serif" font-size="9" fill="#666666">✓ PKI certificates</text>
+  <text x="230" y="553" font-family="Arial, sans-serif" font-size="9" fill="#666666">✓ Identity-based access</text>
+  <text x="230" y="570" font-family="Arial, sans-serif" font-size="9" fill="#666666">✓ Secret rotation</text>
+  <text x="230" y="587" font-family="Arial, sans-serif" font-size="9" fill="#666666">✓ Database credentials</text>
+
+  <!-- Boundary -->
+  <rect x="430" y="420" width="360" height="200" rx="4" fill="#1D1D1D" stroke="#333333" stroke-width="1"/>
+  <rect x="430" y="420" width="360" height="4" rx="2" fill="#EC585D"/>
+  <text x="610" y="462" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#ffffff" text-anchor="middle">Boundary</text>
+  <text x="610" y="480" font-family="Arial, sans-serif" font-size="10" fill="#EC585D" text-anchor="middle">Secure Remote Access</text>
+  <line x1="450" y1="492" x2="770" y2="492" stroke="#333333" stroke-width="1"/>
+  <text x="610" y="512" font-family="Arial, sans-serif" font-size="9" fill="#AAAAAA" text-anchor="middle">Identity-based access management for</text>
+  <text x="610" y="526" font-family="Arial, sans-serif" font-size="9" fill="#AAAAAA" text-anchor="middle">dynamic infrastructure without VPNs</text>
+  <text x="450" y="553" font-family="Arial, sans-serif" font-size="9" fill="#666666">✓ Replace traditional VPNs</text>
+  <text x="450" y="570" font-family="Arial, sans-serif" font-size="9" fill="#666666">✓ Session recording</text>
+  <text x="450" y="587" font-family="Arial, sans-serif" font-size="9" fill="#666666">✓ Zero trust access</text>
+  <text x="610" y="553" font-family="Arial, sans-serif" font-size="9" fill="#666666">✓ Just-in-time credentials</text>
+  <text x="610" y="570" font-family="Arial, sans-serif" font-size="9" fill="#666666">✓ Audit logging</text>
+  <text x="610" y="587" font-family="Arial, sans-serif" font-size="9" fill="#666666">✓ SSO integration</text>
+
+  <!-- Row 3 - Networking -->
+  <text x="60" y="660" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#666666" letter-spacing="2">NETWORKING</text>
+
+  <!-- Consul -->
+  <rect x="50" y="680" width="550" height="140" rx="4" fill="#1D1D1D" stroke="#333333" stroke-width="1"/>
+  <rect x="50" y="680" width="550" height="4" rx="2" fill="#DC477D"/>
+  <text x="325" y="722" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#ffffff" text-anchor="middle">Consul</text>
+  <text x="325" y="740" font-family="Arial, sans-serif" font-size="10" fill="#DC477D" text-anchor="middle">Service Networking</text>
+  <line x1="70" y1="752" x2="580" y2="752" stroke="#333333" stroke-width="1"/>
+  <text x="325" y="772" font-family="Arial, sans-serif" font-size="9" fill="#AAAAAA" text-anchor="middle">Connect and secure services across any runtime platform and cloud</text>
+  <text x="70" y="798" font-family="Arial, sans-serif" font-size="9" fill="#666666">✓ Service discovery</text>
+  <text x="200" y="798" font-family="Arial, sans-serif" font-size="9" fill="#666666">✓ Service mesh (mTLS)</text>
+  <text x="360" y="798" font-family="Arial, sans-serif" font-size="9" fill="#666666">✓ Health checking</text>
+  <text x="490" y="798" font-family="Arial, sans-serif" font-size="9" fill="#666666">✓ Key/Value store</text>
+
+  <!-- HCP Cloud Platform callout -->
+  <rect x="620" y="680" width="530" height="140" rx="4" fill="#1D1D1D" stroke="#7B42BC" stroke-width="2"/>
+  <text x="885" y="722" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">HashiCorp Cloud Platform</text>
+  <text x="885" y="742" font-family="Arial, sans-serif" font-size="10" fill="#7B42BC" text-anchor="middle">Fully Managed Cloud Services</text>
+  <line x1="640" y1="752" x2="1130" y2="752" stroke="#333333" stroke-width="1"/>
+  <text x="885" y="772" font-family="Arial, sans-serif" font-size="9" fill="#AAAAAA" text-anchor="middle">Run HashiCorp products as managed services - no infrastructure to maintain</text>
+  <text x="680" y="798" font-family="Arial, sans-serif" font-size="9" fill="#666666">✓ HCP Terraform</text>
+  <text x="800" y="798" font-family="Arial, sans-serif" font-size="9" fill="#666666">✓ HCP Vault</text>
+  <text x="905" y="798" font-family="Arial, sans-serif" font-size="9" fill="#666666">✓ HCP Consul</text>
+  <text x="1020" y="798" font-family="Arial, sans-serif" font-size="9" fill="#666666">✓ HCP Boundary</text>
+
+  <!-- Footer -->
+  <line x1="0" y1="835" x2="1200" y2="835" stroke="#333333" stroke-width="1"/>
+  <text x="600" y="848" font-family="Arial, sans-serif" font-size="10" fill="#444444" text-anchor="middle">hashicorp.com | Products available under BSL 1.1 with Enterprise editions</text>
+</svg>

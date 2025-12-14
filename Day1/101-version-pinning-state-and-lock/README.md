@@ -22,10 +22,10 @@ For example: `cd ~/TerraformWorkshop/101-version-pinning-state-and-lock/`.
 **Create a file name `main.tf` and add the following terraform configuration block**
 ```hcl
 terraform {
-  required_version = ">= 0.14.8"
+  required_version = ">= 1.14.0"
   required_providers {
     azurerm = {
-      version = "2.74.0"
+      version = "4.52.0"
     }
   }
 }
@@ -33,7 +33,7 @@ terraform {
 
 This puts version constraints around Terraform and the Terraform Provider used in your code. Terraform and Terraform Providers are versioned using Semantic Versioning, e.g. MAJOR.MINOR.PATCH.
 
-The `>=` means that any version of the Terraform binary equal or greater to 0.14.8 will work with your codebase.
+The `>=` means that any version of the Terraform binary equal or greater to 1.14.0 will work with your codebase.
 
 > NOTE: The `~>` operator is known as the "pessimistic contstraint operator" and can be used to allow flexibility within the acceptable PATCH versions of Terraform, providers, or private registry modules.
 
@@ -68,9 +68,9 @@ $ terraform init
 Initializing the backend...
 
 Initializing provider plugins...
-- Finding hashicorp/azurerm versions matching "~> 2.74.0"...
-- Installing hashicorp/azurerm v2.74.0...
-- Installed hashicorp/azurerm v2.74.0 (self-signed, key ID 34365D9472D7468F)
+- Finding hashicorp/azurerm versions matching "~> 4.52.0"...
+- Installing hashicorp/azurerm v4.52.0...
+- Installed hashicorp/azurerm v4.52.0 (self-signed, key ID 34365D9472D7468F)
 
 Partner and community providers are signed by their developers.
 If you'd like to know more about provider signing, you can read about it here:
@@ -172,10 +172,10 @@ Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
 Open `main.tf` and update the azurerm provider version to a newer value, e.g.:
 ```hcl
 terraform {
-  required_version = ">= 0.14.8"
+  required_version = ">= 1.14.0"
   required_providers {
     azurerm = {
-      version = "> 2.74.0" # this is where you're making the change
+      version = "> 4.52.0" # this is where you're making the change
     }
   }
 }
@@ -194,7 +194,7 @@ Error: Provider requirements cannot be satisfied by locked dependencies
 
 The following required providers are not installed:
 
-- registry.terraform.io/hashicorp/azurerm (> 2.74.0)
+- registry.terraform.io/hashicorp/azurerm (> 4.52.0)
 
 Please run "terraform init".
 ```
@@ -221,7 +221,7 @@ Error: Failed to query available provider packages
 
 Could not retrieve the list of available versions for provider
 hashicorp/azurerm: locked provider registry.terraform.io/hashicorp/azurerm
-2.74.0 does not match configured version constraint > 2.74.0; must use
+4.52.0 does not match configured version constraint > 4.52.0; must use
 terraform init -upgrade to allow selection of new versions
 ```
 
@@ -241,8 +241,8 @@ Your `.terraform.lock.hcl` file will look something like this:
 # Manual edits may be lost in future updates.
 
 provider "registry.terraform.io/hashicorp/azurerm" {
-  version     = "2.74.0"
-  constraints = "~> 2.74.0"
+  version     = "4.52.0"
+  constraints = "~> 4.52.0"
   hashes = [
     ...
   ]
@@ -266,7 +266,7 @@ $ terraform init -upgrade
 Initializing the backend...
 
 Initializing provider plugins...
-- Finding hashicorp/azurerm versions matching "> 2.74.0"...
+- Finding hashicorp/azurerm versions matching "> 4.52.0"...
 - Installing hashicorp/azurerm v2.87.0...
 - Installed hashicorp/azurerm v2.87.0 (self-signed, key ID 34365D9472D7468F)
 

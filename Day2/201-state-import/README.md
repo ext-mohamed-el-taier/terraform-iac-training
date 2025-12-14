@@ -2,7 +2,13 @@
 
 ## Expected Outcome
 
-State is important to the Terraform workflow. Sometimes you have resources that were created outside Terraform that you'd like to manage with Terraform. You will learn how to create a simple Terraform configuration to represent these unmanaged resources, then import them using the Terraform CLI so they can be managed by Terraform.
+State is important to the Terraform workflow. Sometimes you have resources that were created outside Terraform that you'd like to manage with Terraform. You will learn how to create a simple Terraform configuration to represent these unmanaged resources, then import them so they can be managed by Terraform.
+
+**Terraform offers two methods for importing resources:**
+1. **`import` block (Terraform 1.5+)** - Declarative, recommended approach
+2. **`terraform import` CLI command** - Imperative, legacy approach
+
+You will learn both methods in this lab.
 
 ## How To
 1. Login to the [Azure Portal](https://portal.azure.com).
@@ -47,6 +53,63 @@ You will create a `main.tf` file with the following:
 
 ### Import Resources
 
+Terraform provides two ways to import resources. We'll cover both.
+
+---
+
+## Method 1: Import Block (Recommended - Terraform 1.5+)
+
+The `import` block is the modern, declarative way to import resources. It allows you to define imports directly in your configuration and execute them as part of `terraform plan` and `terraform apply`.
+
+### Step 1: Add Import Blocks to Your Configuration
+
+Add the following `import` blocks to your `main.tf` (update the IDs to match your resources):
+
+```hcl
+import {
+  to = azurerm_resource_group.main
+  id = "/subscriptions/YOUR_SUBSCRIPTION_ID/resourceGroups/YOUR_RESOURCE_GROUP_NAME"
+}
+
+import {
+  to = azurerm_virtual_network.main
+  id = "/subscriptions/YOUR_SUBSCRIPTION_ID/resourceGroups/YOUR_RESOURCE_GROUP_NAME/providers/Microsoft.Network/virtualNetworks/YOUR_VNET_NAME"
+}
+```
+
+### Step 2: Run Terraform Plan
+
+```sh
+terraform plan
+```
+
+The plan will show the resources being imported. Review the output to ensure the configuration matches the existing resources.
+
+### Step 3: Apply the Import
+
+```sh
+terraform apply
+```
+
+This will import the resources into your state file.
+
+### Step 4: Remove Import Blocks (Optional)
+
+After a successful import, you can remove the `import` blocks from your configuration. They are only needed for the initial import operation.
+
+### Benefits of Import Blocks
+- **Declarative**: Imports are part of your configuration and can be code-reviewed
+- **Plannable**: You can preview imports with `terraform plan` before applying
+- **Batch imports**: Multiple resources can be imported in a single apply
+- **CI/CD friendly**: Works naturally in automated pipelines
+- **Generate configuration**: Use `terraform plan -generate-config-out=generated.tf` to auto-generate resource configurations for imported resources (Terraform 1.5+)
+
+---
+
+## Method 2: CLI Import Command (Legacy)
+
+The `terraform import` CLI command is the traditional way to import resources. It imports one resource at a time directly into the state.
+
 1. Import the Resource Group (your resource ID will vary)
   ```sh
   terraform import azurerm_resource_group.main /subscriptions/0174de8e-22d8-4082-a7a6-f4e808c60c08/resourceGroups/davessweettest1
@@ -55,6 +118,13 @@ You will create a `main.tf` file with the following:
   ```sh
   terraform import azurerm_virtual_network.main /subscriptions/0174de8e-22d8-4082-a7a6-f4e808c60c08/resourcegroups/davessweettest1/providers/Microsoft.Network/virtualNetworks/davesvnet1
   ```
+
+### When to Use CLI Import
+- Quick, one-off imports during development
+- When working with older Terraform versions (< 1.5)
+- Simple scenarios where you don't need plan preview
+
+---
 
 ### Validate Imports
 1. Each import command you run should give you feedback as to whether or not the import succeeded.
@@ -76,3 +146,29 @@ You will create a `main.tf` file with the following:
 
 ### Apply Terraform
 1. The last step is to run `terraform apply` and verify that you get a clean run. At this point, your resources are now managed with Terraform! Don't forget to destroy them when you're done (using Terraform, of course)!
+
+---
+
+## Bonus: Generate Configuration from Existing Resources (Terraform 1.5+)
+
+If you have existing resources but don't want to write the Terraform configuration manually, you can use the `-generate-config-out` flag to auto-generate it:
+
+```sh
+terraform plan -generate-config-out=generated.tf
+```
+
+This will:
+1. Read the import blocks you defined
+2. Fetch the current state of those resources from Azure
+3. Generate the corresponding Terraform resource blocks in `generated.tf`
+
+**Note:** The generated configuration may need cleanup and adjustment, but it's a great starting point!
+
+---
+
+## Discussion Questions
+
+1. What are the advantages of using the `import` block over the CLI command?
+2. When might you still prefer to use the CLI import command?
+3. How does the `-generate-config-out` feature change your workflow when importing large numbers of resources?
+4. What happens if your Terraform configuration doesn't exactly match the imported resource's current state?

@@ -1,9 +1,9 @@
 terraform {
-  required_version = ">= 0.14.8"
+  required_version = ">= 1.14.0"
   required_providers {
     azurerm = {
       source  = "registry.terraform.io/hashicorp/azurerm"
-      version = "> 2.74.0"
+      version = "> 4.52.0"
     }
   }
 }
@@ -54,10 +54,14 @@ resource "azurerm_resource_group" "main" {
   location = var.location
 }
 
+#get tenant ID for Key Vault
+data "azurerm_client_config" "current" {}
+
+
 resource "azurerm_key_vault" "main" {
-  name                     = var.storage_account_name
+  name                     = var.key_vault_name
   location                 = var.location
+  sku_name = abs("standard")
   resource_group_name      = azurerm_resource_group.main.name
-  account_tier             = "standard"
-  account_replication_type = "LRS"
+  tenant_id = data.azurerm_client_config.current.tenant_id
 }

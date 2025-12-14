@@ -11,13 +11,20 @@ resource "azurerm_resource_group" "main" {
   }
 }
 
-resource "azurerm_resource_group" "count" {
-  count = 2
+variable "environments" {
+  type        = list(string)
+  default     = ["dev", "prod"]
+  description = "List of environments to create resource groups for"
+}
 
-  name     = "PREFIX-myfirstrg-${count.index}"
+resource "azurerm_resource_group" "foreach" {
+  for_each = toset(var.environments)
+
+  name     = "PREFIX-myfirstrg-${each.key}"
   location = "centralus"
 
   tags = {
-    terraform = "true"
+    terraform   = "true"
+    environment = each.key
   }
 }
