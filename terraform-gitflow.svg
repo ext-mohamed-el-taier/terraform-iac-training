@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 650">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#161b22;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1100" height="650" fill="url(#bgGrad)"/>
+
+  <!-- Title -->
+  <text x="550" y="40" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#ffffff" text-anchor="middle">Infrastructure Changes via GitFlow</text>
+  <text x="550" y="65" font-family="Arial, sans-serif" font-size="13" fill="#7B42BC" text-anchor="middle">Collaboration, Review, and Visibility for Infrastructure as Code</text>
+
+  <!-- Git branch visualization -->
+  <!-- Main branch line -->
+  <line x1="100" y1="140" x2="1000" y2="140" stroke="#238636" stroke-width="4"/>
+  <text x="50" y="145" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#238636">main</text>
+
+  <!-- Feature branch line -->
+  <path d="M 250 140 Q 280 200, 350 220" stroke="#58a6ff" stroke-width="3" fill="none"/>
+  <line x1="350" y1="220" x2="750" y2="220" stroke="#58a6ff" stroke-width="3"/>
+  <path d="M 750 220 Q 820 200, 850 140" stroke="#58a6ff" stroke-width="3" fill="none"/>
+  <text x="50" y="225" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#58a6ff">feature</text>
+
+  <!-- Commit dots on main -->
+  <circle cx="150" cy="140" r="8" fill="#238636"/>
+  <circle cx="250" cy="140" r="8" fill="#238636"/>
+  <circle cx="850" cy="140" r="10" fill="#238636" stroke="#ffffff" stroke-width="2"/>
+  <circle cx="950" cy="140" r="8" fill="#238636"/>
+
+  <!-- Commit dots on feature branch -->
+  <circle cx="400" cy="220" r="8" fill="#58a6ff"/>
+  <circle cx="500" cy="220" r="8" fill="#58a6ff"/>
+  <circle cx="600" cy="220" r="8" fill="#58a6ff"/>
+  <circle cx="700" cy="220" r="8" fill="#58a6ff"/>
+
+  <!-- Merge indicator -->
+  <text x="850" y="115" font-family="Arial, sans-serif" font-size="10" fill="#2ea043" text-anchor="middle">MERGE</text>
+
+  <!-- Step boxes below the branches -->
+
+  <!-- Step 1: Create Branch -->
+  <rect x="60" y="280" width="180" height="130" rx="8" fill="#21262d" stroke="#58a6ff" stroke-width="2"/>
+  <rect x="60" y="280" width="180" height="4" rx="2" fill="#58a6ff"/>
+  <text x="150" y="308" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle">1. Create Branch</text>
+  <text x="150" y="332" font-family="Arial, sans-serif" font-size="10" fill="#8b949e" text-anchor="middle">Developer creates</text>
+  <text x="150" y="348" font-family="Arial, sans-serif" font-size="10" fill="#8b949e" text-anchor="middle">feature branch</text>
+  <text x="150" y="375" font-family="Arial, sans-serif" font-size="9" fill="#58a6ff" text-anchor="middle">git checkout -b</text>
+  <text x="150" y="392" font-family="Arial, sans-serif" font-size="9" fill="#58a6ff" text-anchor="middle">add-new-vm</text>
+
+  <!-- Step 2: Make Changes -->
+  <rect x="260" y="280" width="180" height="130" rx="8" fill="#21262d" stroke="#7B42BC" stroke-width="2"/>
+  <rect x="260" y="280" width="180" height="4" rx="2" fill="#7B42BC"/>
+  <text x="350" y="308" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle">2. Write Terraform</text>
+  <text x="350" y="332" font-family="Arial, sans-serif" font-size="10" fill="#8b949e" text-anchor="middle">Edit .tf files</text>
+  <text x="350" y="348" font-family="Arial, sans-serif" font-size="10" fill="#8b949e" text-anchor="middle">Commit changes</text>
+  <text x="350" y="375" font-family="Arial, sans-serif" font-size="9" fill="#7B42BC" text-anchor="middle">resource "azurerm_vm"</text>
+  <text x="350" y="392" font-family="Arial, sans-serif" font-size="9" fill="#7B42BC" text-anchor="middle">{...}</text>
+
+  <!-- Step 3: Open PR -->
+  <rect x="460" y="280" width="180" height="130" rx="8" fill="#21262d" stroke="#a371f7" stroke-width="2"/>
+  <rect x="460" y="280" width="180" height="4" rx="2" fill="#a371f7"/>
+  <text x="550" y="308" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle">3. Open Pull Request</text>
+  <text x="550" y="332" font-family="Arial, sans-serif" font-size="10" fill="#8b949e" text-anchor="middle">Request review from</text>
+  <text x="550" y="348" font-family="Arial, sans-serif" font-size="10" fill="#8b949e" text-anchor="middle">team members</text>
+  <text x="550" y="375" font-family="Arial, sans-serif" font-size="9" fill="#a371f7" text-anchor="middle">terraform plan output</text>
+  <text x="550" y="392" font-family="Arial, sans-serif" font-size="9" fill="#a371f7" text-anchor="middle">visible in PR comments</text>
+
+  <!-- Step 4: Review -->
+  <rect x="660" y="280" width="180" height="130" rx="8" fill="#21262d" stroke="#f0883e" stroke-width="2"/>
+  <rect x="660" y="280" width="180" height="4" rx="2" fill="#f0883e"/>
+  <text x="750" y="308" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle">4. Review + Approve</text>
+  <text x="750" y="332" font-family="Arial, sans-serif" font-size="10" fill="#8b949e" text-anchor="middle">Team reviews changes</text>
+  <text x="750" y="348" font-family="Arial, sans-serif" font-size="10" fill="#8b949e" text-anchor="middle">CI runs terraform plan</text>
+  <text x="750" y="375" font-family="Arial, sans-serif" font-size="9" fill="#f0883e" text-anchor="middle">"+ 3 to add"</text>
+  <text x="750" y="392" font-family="Arial, sans-serif" font-size="9" fill="#f0883e" text-anchor="middle">"0 to destroy"</text>
+
+  <!-- Step 5: Merge + Apply -->
+  <rect x="860" y="280" width="180" height="130" rx="8" fill="#0d1a0d" stroke="#238636" stroke-width="2"/>
+  <rect x="860" y="280" width="180" height="4" rx="2" fill="#238636"/>
+  <text x="950" y="308" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#2ea043" text-anchor="middle">5. Merge + Apply</text>
+  <text x="950" y="332" font-family="Arial, sans-serif" font-size="10" fill="#8b949e" text-anchor="middle">Merge to main triggers</text>
+  <text x="950" y="348" font-family="Arial, sans-serif" font-size="10" fill="#8b949e" text-anchor="middle">terraform apply</text>
+  <text x="950" y="375" font-family="Arial, sans-serif" font-size="9" fill="#2ea043" text-anchor="middle">Infrastructure deployed</text>
+  <text x="950" y="392" font-family="Arial, sans-serif" font-size="9" fill="#2ea043" text-anchor="middle">safely and auditably</text>
+
+  <!-- Arrows between steps -->
+  <polygon points="240,345 255,340 255,350" fill="#58a6ff"/>
+  <polygon points="440,345 455,340 455,350" fill="#7B42BC"/>
+  <polygon points="640,345 655,340 655,350" fill="#a371f7"/>
+  <polygon points="840,345 855,340 855,350" fill="#f0883e"/>
+
+  <!-- Benefits section -->
+  <text x="550" y="450" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">Why This Matters</text>
+  <line x1="200" y1="465" x2="900" y2="465" stroke="#30363d" stroke-width="1"/>
+
+  <!-- Benefit boxes -->
+  <rect x="80" y="485" width="220" height="80" rx="6" fill="#21262d" stroke="#58a6ff" stroke-width="1"/>
+  <text x="190" y="515" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#58a6ff" text-anchor="middle">Visibility</text>
+  <text x="190" y="535" font-family="Arial, sans-serif" font-size="9" fill="#8b949e" text-anchor="middle">Everyone sees what's changing</text>
+  <text x="190" y="550" font-family="Arial, sans-serif" font-size="9" fill="#8b949e" text-anchor="middle">before it happens</text>
+
+  <rect x="320" y="485" width="220" height="80" rx="6" fill="#21262d" stroke="#a371f7" stroke-width="1"/>
+  <text x="430" y="515" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#a371f7" text-anchor="middle">Peer Review</text>
+  <text x="430" y="535" font-family="Arial, sans-serif" font-size="9" fill="#8b949e" text-anchor="middle">Catch mistakes before they</text>
+  <text x="430" y="550" font-family="Arial, sans-serif" font-size="9" fill="#8b949e" text-anchor="middle">hit production</text>
+
+  <rect x="560" y="485" width="220" height="80" rx="6" fill="#21262d" stroke="#f0883e" stroke-width="1"/>
+  <text x="670" y="515" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#f0883e" text-anchor="middle">Audit Trail</text>
+  <text x="670" y="535" font-family="Arial, sans-serif" font-size="9" fill="#8b949e" text-anchor="middle">Git history = who changed</text>
+  <text x="670" y="550" font-family="Arial, sans-serif" font-size="9" fill="#8b949e" text-anchor="middle">what, when, and why</text>
+
+  <rect x="800" y="485" width="220" height="80" rx="6" fill="#21262d" stroke="#2ea043" stroke-width="1"/>
+  <text x="910" y="515" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#2ea043" text-anchor="middle">Rollback</text>
+  <text x="910" y="535" font-family="Arial, sans-serif" font-size="9" fill="#8b949e" text-anchor="middle">Revert a commit = revert</text>
+  <text x="910" y="550" font-family="Arial, sans-serif" font-size="9" fill="#8b949e" text-anchor="middle">infrastructure changes</text>
+
+  <!-- Bottom comparison -->
+  <rect x="200" y="585" width="300" height="50" rx="6" fill="#1a0d0d" stroke="#f85149" stroke-width="1"/>
+  <text x="350" y="608" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#f85149" text-anchor="middle">Without GitFlow</text>
+  <text x="350" y="625" font-family="Arial, sans-serif" font-size="9" fill="#8b949e" text-anchor="middle">"I clicked some buttons in the portal..."</text>
+
+  <rect x="600" y="585" width="300" height="50" rx="6" fill="#0d1a0d" stroke="#2ea043" stroke-width="1"/>
+  <text x="750" y="608" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#2ea043" text-anchor="middle">With GitFlow + Terraform</text>
+  <text x="750" y="625" font-family="Arial, sans-serif" font-size="9" fill="#8b949e" text-anchor="middle">"PR #142 reviewed by 3 people, merged Tuesday"</text>
+</svg>

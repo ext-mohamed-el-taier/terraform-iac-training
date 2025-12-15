@@ -1,0 +1,200 @@
+parameters:
+
+# Tenant Name
+  - name: appName
+    type: string
+
+# Service Connection
+  - name: serviceConnection
+    type: string
+
+# Config Folder Path
+  - name: configFolderPath
+    type: string
+
+# Backend Storage Account
+  - name: backendStorageAccount
+    type: string
+
+# Backend Container Name
+  - name: backendContainerName
+    type: string
+    default: 'tfstate'
+
+# Backend Key
+  - name: backendKey
+    type: string
+
+# Variable Group Name
+  - name: variableGroupName
+    type: string
+
+# Environment Name
+  - name: environmentName
+    type: string
+
+# Terraform Version
+  - name: terraformVersion
+    type: string
+    default: '1.12.0'
+
+jobs:
+  - job: terraform_format
+    displayName: 'Terraform Format Check'
+    variables:
+    - group: ${{ parameters.variableGroupName }}
+    steps:
+    - checkout: self
+    - task: TerraformInstaller@2
+      displayName: 'Install Terraform ${{ parameters.terraformVersion }}'
+      inputs:
+        terraformVersion: '${{ parameters.terraformVersion }}'
+    - task: TerraformCLI@2
+      displayName: 'Terraform Format Check'
+      inputs:
+        command: fmt
+        workingDirectory: '${{ parameters.configFolderPath }}'
+        commandOptions: '-check -recursive'
+
+  - job: terraform_validate
+    displayName: 'Terraform Validate'
+    dependsOn: terraform_format
+    variables:
+    - group: ${{ parameters.variableGroupName }}
+    steps:
+    - checkout: self
+    - task: TerraformInstaller@2
+      displayName: 'Install Terraform ${{ parameters.terraformVersion }}'
+      inputs:
+        terraformVersion: '${{ parameters.terraformVersion }}'
+    - task: TerraformCLI@2
+      displayName: 'Terraform Init'
+      inputs:
+        command: init
+        backendType: azurerm
+        backendServiceArm: '${{ parameters.serviceConnection }}'
+        backendAzureRmStorageAccountName: '${{ parameters.backendStorageAccount }}'
+        backendAzureRmContainerName: '${{ parameters.backendContainerName }}'
+        backendAzureRmKey: '${{ parameters.backendKey }}'
+        workingDirectory: '${{ parameters.configFolderPath }}'
+    - task: TerraformCLI@2
+      displayName: 'Terraform Validate'
+      inputs:
+        command: validate
+        workingDirectory: '${{ parameters.configFolderPath }}'
+
+  - job: terraform_plan
+    displayName: 'Terraform Plan (What-If)'
+    dependsOn: terraform_validate
+    variables:
+    - group: ${{ parameters.variableGroupName }}
+    steps:
+    - checkout: self
+    - task: TerraformInstaller@2
+      displayName: 'Install Terraform ${{ parameters.terraformVersion }}'
+      inputs:
+        terraformVersion: '${{ parameters.terraformVersion }}'
+    - task: TerraformCLI@2
+      displayName: 'Terraform Init'
+      inputs:
+        command: init
+        backendType: azurerm
+        backendServiceArm: '${{ parameters.serviceConnection }}'
+        backendAzureRmStorageAccountName: '${{ parameters.backendStorageAccount }}'
+        backendAzureRmContainerName: '${{ parameters.backendContainerName }}'
+        backendAzureRmKey: '${{ parameters.backendKey }}'
+        workingDirectory: '${{ parameters.configFolderPath }}'
+    - task: TerraformCLI@2
+      displayName: 'Terraform Plan'
+      inputs:
+        command: plan
+        environmentServiceName: '${{ parameters.serviceConnection }}'
+        workingDirectory: '${{ parameters.configFolderPath }}'
+        commandOptions: '-out=${{ parameters.appName }}-${{ parameters.environmentName }}.tfplan'
+        publishPlanResults: '${{ parameters.appName }}-${{ parameters.environmentName }}-plan'
+      env:
+        TF_VAR_APP_CLIENT_ID: $(APP_CLIENT_ID)
+        TF_VAR_APP_CLIENT_SECRET: $(APP_CLIENT_SECRET)
+        TF_VAR_APP_URL: $(APP_URL)
+        TF_VAR_APP_SMTP_USER: $(APP_SMTP_USER)
+        TF_VAR_APP_SMTP_PASS: $(APP_SMTP_PASS)
+        TF_VAR_APP_SMTP_SERVER: $(APP_SMTP_SERVER)
+        TF_VAR_APP_SMTP_PORT: $(APP_SMTP_PORT)
+        TF_VAR_APP_EMAIL_FROM_ADDRESS: $(APP_EMAIL_FROM_ADDRESS)
+        TF_VAR_APP_EMAIL_DISPLAY_NAME: $(APP_EMAIL_DISPLAY_NAME)
+
+
+  - deployment: terraform_apply
+    displayName: 'Deploy ${{ parameters.appName }} to ${{ parameters.environmentName }}'
+    environment: '${{ parameters.environmentName }}'
+    dependsOn: 
+    - terraform_format
+    - terraform_validate
+    - terraform_plan
+    variables:
+    - group: ${{ parameters.variableGroupName }}
+    workspace:
+      clean: all
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - checkout: self
+            persistCredentials: true
+          - script: |
+              git config --global credential.helper store
+              echo "https://token:$(System.AccessToken)@dev.azure.com" > ~/.git-credentials
+            displayName: 'Configure Git Authentication for Terraform'
+            env:
+              SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+          - task: TerraformInstaller@2
+            displayName: 'Install Terraform ${{ parameters.terraformVersion }}'
+            inputs:
+              terraformVersion: '${{ parameters.terraformVersion }}'
+          - task: TerraformCLI@2
+            displayName: 'Terraform Init'
+            inputs:
+              command: init
+              backendType: azurerm
+              backendServiceArm: '${{ parameters.serviceConnection }}'
+              backendAzureRmStorageAccountName: '${{ parameters.backendStorageAccount }}'
+              backendAzureRmContainerName: '${{ parameters.backendContainerName }}'
+              backendAzureRmKey: '${{ parameters.backendKey }}'
+              workingDirectory: '${{ parameters.configFolderPath }}'
+          - task: TerraformCLI@2
+            displayName: 'Terraform Plan'
+            inputs:
+              command: plan
+              environmentServiceName: '${{ parameters.serviceConnection }}'
+              workingDirectory: '${{ parameters.configFolderPath }}'
+              commandOptions: '-out=${{ parameters.appName }}-${{ parameters.environmentName }}.tfplan'
+              publishPlanResults: '${{ parameters.appName }}-${{ parameters.environmentName }}-deploy-plan'
+            env:
+              TF_VAR_APP_CLIENT_ID: $(APP_CLIENT_ID)
+              TF_VAR_APP_CLIENT_SECRET: $(APP_CLIENT_SECRET)
+              TF_VAR_APP_URL: $(APP_URL)
+              TF_VAR_APP_SMTP_USER: $(APP_SMTP_USER)
+              TF_VAR_APP_SMTP_PASS: $(APP_SMTP_PASS)
+              TF_VAR_APP_SMTP_SERVER: $(APP_SMTP_SERVER)
+              TF_VAR_APP_SMTP_PORT: $(APP_SMTP_PORT)
+              TF_VAR_APP_EMAIL_FROM_ADDRESS: $(APP_EMAIL_FROM_ADDRESS)
+              TF_VAR_APP_EMAIL_DISPLAY_NAME: $(APP_EMAIL_DISPLAY_NAME)
+
+
+          - task: TerraformCLI@2
+            displayName: 'Terraform Apply'
+            inputs:
+              command: apply
+              environmentServiceName: '${{ parameters.serviceConnection }}'
+              workingDirectory: '${{ parameters.configFolderPath }}'
+              commandOptions: '${{ parameters.appName }}-${{ parameters.environmentName }}.tfplan'
+            env:
+              TF_VAR_APP_CLIENT_ID: $(APP_CLIENT_ID)
+              TF_VAR_APP_CLIENT_SECRET: $(APP_CLIENT_SECRET)
+              TF_VAR_APP_URL: $(APP_URL)
+              TF_VAR_APP_SMTP_USER: $(APP_SMTP_USER)
+              TF_VAR_APP_SMTP_PASS: $(APP_SMTP_PASS)
+              TF_VAR_APP_SMTP_SERVER: $(APP_SMTP_SERVER)
+              TF_VAR_APP_SMTP_PORT: $(APP_SMTP_PORT)
+              TF_VAR_APP_EMAIL_FROM_ADDRESS: $(APP_EMAIL_FROM_ADDRESS)
+              TF_VAR_APP_EMAIL_DISPLAY_NAME: $(APP_EMAIL_DISPLAY_NAME)

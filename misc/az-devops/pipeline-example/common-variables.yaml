@@ -1,0 +1,51 @@
+# Common Variables for Azure DevOps Pipelines
+# This file contains shared variables used across multiple pipelines to eliminate duplication
+
+variables:
+  # Azure Service Connections
+  - name: devServiceConnection
+    value: ''
+  - name: stagingServiceConnection
+    value: ''
+  - name: prodServiceConnection
+    value: ''
+
+  # Azure DevOps Environment Names
+  - name: devEnvironmentName
+    value: ''
+  - name: stagingEnvironmentName
+    value: ''
+  - name: prodEnvironmentName
+    value: ''
+
+
+  # Pool Configuration
+  - name: defaultPool
+    value: ''
+
+  # Terraform Backend Storage Accounts
+  - name: devTFBackendStorageAccount
+    value: ''
+
+  - name: stagingTFBackendStorageAccount
+    value: 'TBD'
+    
+  - name: prodTFBackendStorageAccount
+    value: 'TBD'
+  
+  # Terraform Configuration
+  - name: backendContainerName
+    value: 'tfstate'
+
+  - name: terraformVersion
+    value: '1.12.0'
+  
+  # Terraform Variable Groups
+  - name: devVariableGroup
+    value: 'app-dev'
+
+  - name: stagingVariableGroup
+    value: 'app-staging'
+
+  - name: prodVariableGroup
+    value: 'app-prod'

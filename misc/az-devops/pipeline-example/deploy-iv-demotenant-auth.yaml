@@ -1,0 +1,87 @@
+## Pipeline for deploying demo tenant auth resources (Realm, clients, roles, users) using terraform
+name: APP_Terraform_Deployment_$(Date:yyyyMMdd)_$(Rev:r)
+trigger: none
+
+parameters:
+- name: appName
+  type: string
+  default: 'appName'
+
+- name: devConfigFolder
+  type: string
+  default: '$(System.DefaultWorkingDirectory)/src/config/terraform/appName/dev'
+
+- name: stagingConfigFolder
+  type: string
+  default: '$(System.DefaultWorkingDirectory)/src/config/terraform/appName/staging'
+
+- name: prodConfigFolder
+  type: string
+  default: '$(System.DefaultWorkingDirectory)/src/config/terraform/appName/prod'
+
+- name: devVariableGroup
+  type: string
+  default: 'app-dev'
+
+- name: stagingVariableGroup
+  type: string
+  default: 'app-staging'
+
+- name: prodVariableGroup
+  type: string
+  default: 'app-prod'
+
+
+variables:
+- template: ../../variables/common-variables.yaml
+
+pool:
+  name: $(defaultPool)
+
+stages:
+- stage: Dev
+  displayName: 'Deploy to Dev Environment'
+  jobs:
+    - template: ./terraform-deployment.yaml
+      parameters:
+        appName: '${{ parameters.appName }}'
+        serviceConnection: '$(devServiceConnection)'
+        configFolderPath: '${{ parameters.devConfigFolder }}'
+        backendStorageAccount: '$(devTFBackendStorageAccount)'
+        backendContainerName: '$(backendContainerName)'
+        backendKey: 'dev/${{ parameters.appName }}/tf.tfstate'
+        variableGroupName: '${{ parameters.devVariableGroup }}'
+        environmentName: '$(devEnvironmentName)'
+        terraformVersion: '$(terraformVersion)'
+
+- stage: Staging
+  displayName: 'Deploy to Staging Environment'
+  jobs:
+    - template: ./terraform-deployment.yaml
+      parameters:
+        appName: '${{ parameters.appName }}'
+        serviceConnection: '$(stagingServiceConnection)'
+        configFolderPath: '${{ parameters.stagingConfigFolder }}'
+        backendStorageAccount: '$(stagingTFBackendStorageAccount)'
+        backendContainerName: '$(backendContainerName)'
+        backendKey: 'staging/${{ parameters.appName }}/tf.tfstate'
+        variableGroupName: '${{ parameters.stagingVariableGroup }}'
+        environmentName: '$(stagingEnvironmentName)'
+        terraformVersion: '$(terraformVersion)'
+
+- stage: Production
+  displayName: 'Deploy to Production Environment'
+  dependsOn: Staging
+  condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/main'))
+  jobs:
+    - template: ./terraform-deployment.yaml
+      parameters:
+        appName: '${{ parameters.appName }}'
+        serviceConnection: '$(prodServiceConnection)'
+        configFolderPath: '${{ parameters.prodConfigFolder }}'
+        backendStorageAccount: '$(prodTFBackendStorageAccount)'
+        backendContainerName: '$(backendContainerName)'
+        backendKey: 'prod/${{ parameters.appName }}/tf.tfstate'
+        variableGroupName: '${{ parameters.prodVariableGroup }}'
+        environmentName: '$(prodEnvironmentName)'
+        terraformVersion: '$(terraformVersion)'
